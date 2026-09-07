@@ -17,7 +17,7 @@ flowchart LR
   A --> U[Operator and lender web app]
 ```
 
-This is a target architecture, not implemented behavior. Signed telemetry needs an identified issuer and a trust policy; anchoring a hash only proves a commitment exists. Revenue must be tied to recognized payment events and operator ownership. Transaction inclusion alone does not establish successful payment or business legitimacy. MVP metrics should call out what they measure and what they do not prove.
+This diagram is the target architecture. RevenueSource, RevenueEvidence, CreditPolicy and LoanManager are implemented locally and tested; live deployment, API/worker integration and browser wallet transactions remain pending. Signed telemetry needs an identified issuer and a trust policy; anchoring a hash only proves a commitment exists. Revenue must be tied to recognized payment events and operator ownership. Transaction inclusion alone does not establish successful payment or business legitimacy. MVP metrics should call out what they measure and what they do not prove.
 
 ## Responsibilities
 
@@ -27,7 +27,7 @@ This is a target architecture, not implemented behavior. Signed telemetry needs 
 - Domain: canonical operator, evidence, credit decision, and loan types.
 - Attestcoin adapter: isolate evolving proof formats and native verifier ABI; live path rejects unimplemented verification.
 - Underwriting: integer arithmetic and explicit policy version; mirror or enforce policy in contracts so clients cannot fabricate approval.
-- Contracts (planned): OperatorRegistry, EvidenceRegistry, CreditPolicy, LoanManager, FundingVault, and a test-only verifier/token. Prefer a small fixed-term loan with capped revenue-based principal over revolving credit for this deadline.
+- Contracts: RevenueSource and RevenueEvidence bind recognized payments; CreditPolicy reads current-day demo revenue; LoanManager combines one designated lender’s cash custody with fixed-term loans. DemoUSD is a labeled fixed-supply test asset. Separate registration and pooled lender shares remain deferred.
 
 ## Minimal records
 

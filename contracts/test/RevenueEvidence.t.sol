@@ -65,7 +65,7 @@ contract TestToken is ERC20 {
     }
 }
 
-contract RevenueEvidenceTest {
+abstract contract EvidenceHarness {
     Vm constant vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
     address constant NATIVE = address(0xFD2);
     address constant OPERATOR = address(0xBEEF);
@@ -75,7 +75,7 @@ contract RevenueEvidenceTest {
     RevenueEvidence registry;
     MockNativeVerifier mock;
 
-    function setUp() public {
+    function setUp() public virtual {
         vm.warp(10 days);
         MockNativeVerifier template = new MockNativeVerifier();
         vm.etch(NATIVE, address(template).code);
@@ -127,7 +127,9 @@ contract RevenueEvidenceTest {
         vm.prank(OPERATOR);
         return registry.accept(p);
     }
+}
 
+contract RevenueEvidenceTest is EvidenceHarness {
     function test_acceptAndAggregateOnce() public {
         IRevenueVerifier.PaymentProof memory p = proofFor(logFor(1), 1);
         bytes32 id = accept(p);

@@ -31,3 +31,7 @@ Optional endpoints are `CREDITCOIN_RPC_URL` and `ATTESTCOIN_PROOF_API_URL`. The 
 Deployment has not been performed. Prepare a labeled demo ERC-20 on Sepolia, then deploy RevenueSource with its address. Deploy RevenueEvidence on Creditcoin testnet with chain key 1, that source address, that asset, an explicit short-window freshness horizon and a versioned demo policy hash. Record constructor arguments and explorer links. Use separate payer/operator test wallets, approve and make one test payment, wait for attestation, prepare and submit evidence, then demonstrate duplicate rejection. Deployment and token movement require explicit authorization under AGENTS.md; never supply private keys in chat or tracked files.
 
 Payment inclusion proves a recognized transfer occurred. It does not prove service delivery, independent commercial demand, lack of collusion, net revenue after off-contract refunds, or uptime. These limitations must remain visible; do not grant borrowing capacity until the revenue policy and on-chain debt controls are implemented.
+
+## Lending follow-up
+
+CreditPolicy and LoanManager are now implemented locally; the combined suite passes 35 tests. The policy is deliberately a current-UTC-day demo, not the proposed complete 30-day policy. See [testnet runbook](testnet-runbook.md) for exact parameters and authorized deployment steps. Signing setup and destination gas are pending. No live Nodra payment has been verified yet.
