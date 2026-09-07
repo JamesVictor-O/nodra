@@ -1,0 +1,10 @@
+{
+  "synthetic": true,
+  "verificationMode": "mock",
+  "operatorName": "Demo compute operator",
+  "settlementAsset": "TEST_USD",
+  "assetDecimals": 6,
+  "revenue30dBaseUnits": "12000000000",
+  "uptimeBps": 9950,
+  "note": "Illustrative inputs only. Not verified evidence or a calibrated credit decision."
+}
