@@ -9,3 +9,6 @@ contracts/out/
 contracts/cache/
 contracts/broadcast/
 .DS_Store
+*.tsbuildinfo
+test-results/
+playwright-report/

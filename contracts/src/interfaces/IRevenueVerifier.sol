@@ -1,9 +1,30 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+pragma solidity ^0.8.28;
 
-/// @notice Proposed application adapter, NOT the native Creditcoin verifier ABI.
+import {INativeQueryVerifier} from "@gluwa/asc-contracts/contracts/write-ability/common/INativeQueryVerifier.sol";
+
+/// @notice Nodra application interface, distinct from the native verifier ABI.
 interface IRevenueVerifier {
-    /// @dev Implementation must revert on invalid proof or mismatched canonical evidence hash.
-    /// Must validate successful payment semantics, source/recipient/asset and replay binding.
-    function verifyRevenue(bytes calldata proof, bytes32 evidenceHash) external view returns (bool);
+    struct PaymentProof {
+        uint64 chainKey;
+        uint64 blockHeight;
+        bytes encodedTransaction;
+        INativeQueryVerifier.MerkleProof merkleProof;
+        INativeQueryVerifier.ContinuityProof continuityProof;
+        uint256 logIndex;
+    }
+
+    struct Payment {
+        address operator;
+        address payer;
+        uint256 paymentId;
+        address asset;
+        uint256 amount;
+        uint64 paidAt;
+        bytes32 invoiceId;
+    }
+    function verifyRevenue(PaymentProof calldata proof)
+        external
+        view
+        returns (bytes32 evidenceId, Payment memory payment);
 }

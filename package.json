@@ -12,6 +12,16 @@
     "npm": ">=11 <12"
   },
   "scripts": {
-    "check": "node scripts/check-scaffold.mjs"
+    "check": "node scripts/check-scaffold.mjs",
+    "dev": "npm run dev -w @nodra/web",
+    "build": "npm run build -w @nodra/web",
+    "typecheck": "npm run typecheck -w @nodra/web",
+    "test:e2e": "npm run test:e2e -w @nodra/web",
+    "test:contracts": "forge test --root contracts --offline",
+    "proof:prepare": "node scripts/prepare-revenue-proof.mjs"
+  },
+  "devDependencies": {
+    "@gluwa/asc-contracts": "0.2.1",
+    "@openzeppelin/contracts": "5.4.0"
   }
 }

@@ -5,6 +5,8 @@
   "type": "module",
   "exports": "./src/index.ts",
   "dependencies": {
-    "@nodra/domain": "0.0.0"
+    "@gluwa/usc-sdk": "0.18.0",
+    "@nodra/domain": "0.0.0",
+    "ethers": "6.17.0"
   }
 }

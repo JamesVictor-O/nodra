@@ -1,4 +1,4 @@
-name: Scaffold checks
+name: Workspace and frontend checks
 on: [push, pull_request]
 permissions:
   contents: read
@@ -11,5 +11,15 @@ jobs:
         with:
           node-version: '24'
           cache: npm
-      - run: npm ci --ignore-scripts
+      - run: npm ci
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.4.3
+      - run: forge build --root contracts
+      - run: npm run test:contracts
+      - run: node --check scripts/prepare-revenue-proof.mjs
       - run: npm run check
+      - run: npm run build
+      - run: npm run typecheck
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e

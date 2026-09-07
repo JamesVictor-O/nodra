@@ -1,23 +1,26 @@
-# Integration research and decisions
+# Integration decisions
 
-Checked September 7, 2026. Reconfirm values during implementation; no chain IDs, verifier addresses, proof APIs, or ABIs are guessed in this scaffold.
+Updated September 7, 2026 after inspecting current docs, published SDK/contract sources and read-only testnet state. See [full research](creditcoin-research.md) and [hackathon requirements](hackathon-requirements.md).
 
-## Official references
+## Selected MVP direction
 
-- Hackathon: https://buidl.creditcoin.org/ — lists BUIDL CTC 2026 Fall and September 13, 2026 submission deadline. Confirm submission timezone, registration, required artifacts, and track rules with organizers.
-- USC overview: https://docs.creditcoin.org/usc
-- Architecture: https://docs.creditcoin.org/usc/overview/usc-architecture-overview — explains attestors, proof generation, and native verification; application contracts must validate transaction success.
-- Tutorials: https://docs.creditcoin.org/usc/dapp-builder-infrastructure/usc-tutorials
-- Official example repository: https://github.com/gluwa/usc-testnet-bridge-examples — evaluate as the integration reference, not a production lending implementation.
+- Creditcoin testnet (102031) for financing state and test-asset settlement.
+- Ethereum Sepolia (11155111) as evidence source, Attestcoin chain key 1. Query ChainInfo before relying on this mapping.
+- Attestcoin readability using `@gluwa/usc-sdk` 0.18.0 with ethers v6; evaluate `@gluwa/asc-contracts` 0.2.1 for on-chain integration.
+- Solidity 0.8.28 to match the inspected ASC package; validate compiler EVM target before deployment.
+- Keep writability outside MVP: the dedicated docs still mark it as pending testing/audits.
+- npm workspaces, TypeScript, planned Next.js UI, small API/worker and PostgreSQL remain suitable.
 
-## Gate before lending implementation
+## Current sources
 
-Record the supported source/destination network pair, finality requirements, chain IDs, RPCs, native verifier address/ABI, proof service schema, SDK version, explorer links, test tokens, and a reproducible successful proof transaction. Confirm how the hackathon's Attestcoin terminology maps to the current USC APIs. Do not assume an independent Attestcoin SDK exists.
+[Attestcoin docs](https://docs.attestcoin.org/) replace the older USC documentation. [Official examples](https://github.com/gluwa/attestcoin-protocol-examples) now import ASCBase and EvmV1Decoder from the published ASC package. The SDK retains its USC name. Follow current pinned source rather than older minter snippets.
 
-Verify whether the proof exposes successful receipts/logs or only transaction data. If successful payment cannot be proven with the available interface, change the source evidence design before accepting revenue. Confirm operator ownership and allowed revenue source contract. A proof of transaction inclusion is insufficient by itself.
+## Remaining gate
 
-## Tooling decisions
+Connectivity, chain-key mapping and attestation metadata were checked. Full proof generation, native verification of a payment, Nodra decoding, library address validation, EVM/compiler compatibility and negative tests remain. A successful API response cannot approve a loan. Receipt success, emitter, asset, recipient, amount, source binding, freshness and replay checks must run on chain.
 
-Target npm workspaces + TypeScript; Next.js web; small TypeScript API and worker; PostgreSQL for indexing; Solidity + Foundry for EVM contracts. Validate tool versions in milestone 0. Avoid an unrelated Solana starter. Use the official USC examples for a small integration spike.
+`.env.example` contains research-checked candidate endpoints in mock mode. Decoder remains blank because official sources conflict. No live verifier, loan contracts or deployment has been implemented.
 
-Relevant available skill for later implementation: vercel-react-best-practices for the Next.js app. Browser automation MCP can validate the local demo once available; no extra MCP or skill installation is necessary for this scaffold.
+## Skills
+
+Installed project-local OpenZeppelin `setup-solidity-contracts` and `develop-secure-contracts`; provenance is in `skills-lock.json`. Relevant UI/browser skills are already available. No additional MCP is needed for current integration research.

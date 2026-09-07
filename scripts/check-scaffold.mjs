@@ -8,4 +8,4 @@ for (const root of roots) {
 for (const path of ['docs/build-plan.md', 'docs/architecture.md', 'docs/integrations.md', 'contracts/foundry.toml']) await access(path);
 const fixture = JSON.parse(await readFile('fixtures/operator.example.json', 'utf8'));
 if (fixture.synthetic !== true || fixture.verificationMode !== 'mock') throw new Error('Fixture must be labeled synthetic/mock');
-console.log(`Scaffold checks passed (${roots.length} workspaces). No application or protocol tests exist yet.`);
+console.log(`Scaffold checks passed (${roots.length} workspaces). Run test:e2e separately for frontend checks; live protocol tests are not implemented.`);

@@ -4,13 +4,13 @@ Revenue-backed infrastructure financing on Creditcoin. Nodra connects verified o
 
 ## Status
 
-Initial workspace scaffold and build plan. No application, lending implementation, live verification, or deployment exists yet. Package boundaries and interfaces are ready for implementation. Mock data is synthetic and must never be presented as verified economic activity.
+Interactive frontend implemented: landing page, protocol overview, operator dashboard, evidence explorer, financing, lender market and settings. All app data and financial actions are clearly labeled browser simulations. No live wallet, API, lending contract or verification adapter is connected.
 
 ## Workspace
 
 ```text
 apps/
-  web/                 Operator and lender interface (planned Next.js)
+  web/                 Operator and lender interface (Next.js)
   api/                 Authentication, read API, and persistence (planned TypeScript)
   worker/              Source ingestion, proof jobs, and chain indexing
 packages/
@@ -24,12 +24,14 @@ contracts/
   script/              Deployment and demo scripts
 fixtures/              Explicitly synthetic demo data
 scripts/               Workspace tooling
- deployments/          Network-specific deployment manifests
+deployments/          Network-specific deployment manifests
  docs/                 Architecture, scope, milestones, and demo
 ```
 
 ## Start
 
-Use Node.js 24 and npm 11. Run `npm install`, then `npm run check`. The check validates this scaffold; it does not test a working protocol. Copy `.env.example` to `.env` when implementing services. Dependencies for Next.js, wallet integration, API, database, and contract tooling will be installed in the relevant implementation milestone.
+Use Node.js 24 and npm 11. Run `npm ci`, then `npm run dev` and open http://127.0.0.1:3000. Run `npm run build` and `npm run typecheck` for the frontend. `npm run check` validates the workspace structure; it does not test a working protocol. See [frontend setup](apps/web/README.md) for browser tests and demo boundaries.
 
 Read [the build plan](docs/build-plan.md), [architecture](docs/architecture.md), and [integration research](docs/integrations.md). The first milestone resolves live verification and network compatibility before building lending around it.
+
+Current [Creditcoin/Attestcoin research](docs/creditcoin-research.md) includes live network observations, package compatibility, trust boundaries and installed skills. See [hackathon requirements](docs/hackathon-requirements.md) for confirmed dates and unresolved submission rules.

@@ -2,7 +2,13 @@
 
 ## Outcome
 
-Show a DePIN operator convert verified source-chain revenue into an explainable borrowing limit on Creditcoin, receive expansion capital, repay, and build an inspectable credit history. Primary positioning: infrastructure/RWA financing, with lending as the DeFi mechanism. Confirm the official track selection at submission.
+Show a DePIN operator convert verified source-chain revenue into an explainable borrowing limit on Creditcoin, receive expansion capital, repay, and build an inspectable credit history. Primary candidate track: DePIN, with infrastructure/RWA financing and lending as the DeFi mechanism. Confirm permitted track selection at submission.
+
+## Research update (September 7)
+
+Read [current integration research](creditcoin-research.md) and [hackathon requirements](hackathon-requirements.md). Use the current Attestcoin docs and examples; target Sepolia → Creditcoin testnet readability, SDK 0.18.0, ASC contracts 0.2.1 and Solidity 0.8.28. RPC and chain mappings were checked, but the full proof-to-loan gate is still incomplete. Writability is outside scope. Deadline is September 13 at 23:59 ET; maintain an earlier internal submission target.
+
+Fresh demo transactions cannot support a genuine 30-day policy. Use historical verified coverage or an explicitly separate short-window demo policy. Resolve authenticated source timestamps, approved payment sources and refund treatment before computing credit.
 
 ## Scope
 
@@ -20,11 +26,13 @@ Supplementary uptime/performance reports must show issuer, provenance and verifi
 | Sep 10 | Implement wallet auth, persistence/indexing and operator/lender screens | Register → inspect proof → view decision → borrow works from the browser |
 | Sep 11 | Connect live proof path and repayment history; add delinquency/default handling | Complete live testnet flow with explorer links and visible provenance; stale evidence blocks borrowing |
 | Sep 12 | Run integration/security checks, polish empty/error states, rehearse and record | Reproducible demo and invalid-evidence rejection; README matches actual capabilities |
-| Sep 13 | Freeze implementation, finalize pitch and submit ahead of cutoff | Repository, deployment links, video and required artifacts submitted; exact deadline timezone confirmed |
+| Sep 13 | Freeze implementation, finalize pitch and submit ahead of cutoff | Repository, deployment links, video and required artifacts submitted; submission form and eligibility checked |
 
 If live verification is blocked on day 1, continue UI and contracts against an explicitly labeled mock adapter while resolving it. A mock-only demo does not meet the live integration acceptance criterion and must be disclosed in the submission.
 
 ## Initial policy proposal
+
+Implementation checkpoint: the frontend demo, source-payment contract and native-verifier evidence registry are implemented locally. The contract suite passes 22 tests using a test-only mock native verifier. Read-only SDK proof preparation is available; deployment and a live Nodra payment proof remain pending. See [revenue verification](revenue-verification.md) for commands, trust boundaries and the next integration gate. Credit policy, lending and browser wallet integration remain unimplemented.
 
 One settlement asset with integer base units. Require a full 30-day evidence window and use a versioned, conservative revenue advance fraction. A candidate formula is `available = max(0, min(verifiedRevenue30d × advanceBps / 10000, operatorCap) - outstandingDebt)`. Parameters are uncalibrated demo assumptions, not a validated credit model. Reject incomplete/stale evidence and overdue operators. Define fee, maturity, rounding and default transitions explicitly before implementation. Do not allow browser-supplied revenue, scores or limits to authorize draws.
 
