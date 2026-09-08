@@ -39,7 +39,7 @@ export default function Home() {
               verifiable history of real work.
             </p>
             <div className="hero-actions">
-              <Link href="/app" className="button accent">
+              <Link href="/operator" className="button accent">
                 Explore your borrowing power <ArrowUpRight size={18} />
               </Link>
               <Link href="#how-it-works" className="text-link">
@@ -187,14 +187,14 @@ export default function Home() {
                 operating history, and loan terms. Make a decision with context,
                 not just collateral.
               </p>
-              <Link className="text-link" href="/app/market">
-                Explore the demo market <ArrowUpRight size={17} />
+              <Link className="text-link" href="/lender">
+                Explore the funding vault <ArrowUpRight size={17} />
               </Link>
             </div>
           </div>
           <div className="risk-note">
             Revenue-backed lending carries default risk. The current experience
-            uses synthetic data and simulated balances. No real funds move.
+            uses on-chain test tokens with no monetary value.
           </div>
         </section>
         <section className="wrap faq section">
@@ -205,8 +205,8 @@ export default function Home() {
           <div>
             {[
               [
-                "What can I do in the demo?",
-                "Explore an operator's sample activity, inspect evidence, simulate a financing request, and allocate a demo lender balance. All actions stay in this browser.",
+                "What can I do on testnet?",
+                "Inspect accepted payment evidence, connect your wallet, and use on-chain financing. Funding and withdrawals are limited to the designated lender.",
               ],
               [
                 "What does Attestcoin actually verify?",
@@ -214,7 +214,7 @@ export default function Home() {
               ],
               [
                 "Is Nodra live?",
-                "Nodra is being built for BUIDL CTC 2026 Fall. This frontend is an interactive prototype; live verification and financing contracts are not connected.",
+                "Nodra runs on Creditcoin testnet with Sepolia payment evidence. The full payment, proof, borrowing and repayment flow has completed with test tokens.",
               ],
             ].map(([q, a]) => (
               <details key={q}>
@@ -233,8 +233,8 @@ export default function Home() {
           </span>
           <div>
             <h2>Put your performance to work.</h2>
-            <Link href="/app" className="button accent">
-              Enter the demo <ArrowUpRight size={20} />
+            <Link href="/operator" className="button accent">
+              Open the workspace <ArrowUpRight size={20} />
             </Link>
           </div>
         </section>

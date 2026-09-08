@@ -1,0 +1,46 @@
+{
+  "chainId": "102031",
+  "loanManager": "0x0115CA8539906db2d9a4beE36C64eA94a0d7Fa31",
+  "checkedAtBlock": "5448880",
+  "nextLoanId": "2",
+  "totalOutstanding": "0",
+  "loan1": [
+    "0x2e5d8B56F9B4770a88794a47C32c177542d2f6ea",
+    "40000000",
+    "0",
+    "1789428105",
+    false
+  ],
+  "events": [
+    {
+      "name": "Funded",
+      "values": [
+        "1000000000"
+      ],
+      "transactionHash": "0x3ff457b1d7141a2387d6ee13594237048ba70c32989f7595bec0fe037c712a13",
+      "blockNumber": "5448872"
+    },
+    {
+      "name": "Borrowed",
+      "values": [
+        "1",
+        "0x2e5d8B56F9B4770a88794a47C32c177542d2f6ea",
+        "40000000",
+        "40400000",
+        "1789428105"
+      ],
+      "transactionHash": "0x4d209fced35b0c2cc9594034d2f087797f38c32f93101a0ccd8d179c57c920e9",
+      "blockNumber": "5448874"
+    },
+    {
+      "name": "Repaid",
+      "values": [
+        "1",
+        "40400000",
+        "0"
+      ],
+      "transactionHash": "0x101fb3c3ab543effde0972902245330c3e74f6a21250c6c4111a4ca78d169d59",
+      "blockNumber": "5448877"
+    }
+  ]
+}

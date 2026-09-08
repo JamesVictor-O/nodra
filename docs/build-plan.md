@@ -32,7 +32,7 @@ If live verification is blocked on day 1, continue UI and contracts against an e
 
 ## Initial policy proposal
 
-Implementation checkpoint: the frontend demo, source-payment contract and native-verifier evidence registry are implemented locally. The contract suite passes 22 tests using a test-only mock native verifier. Read-only SDK proof preparation is available; deployment and a live Nodra payment proof remain pending. See [revenue verification](revenue-verification.md) for commands, trust boundaries and the next integration gate. CreditPolicy and LoanManager now implement a separate current-UTC-day demo policy, one active loan, fee-inclusive caps, repayment and permanent default history. All 35 contract tests pass; native verification remains mocked in tests. Browser wallet integration and live acceptance remain pending. See [testnet runbook](testnet-runbook.md).
+Current checkpoint: canonical source, evidence, policy and lending contracts are deployed on testnet. The payment-to-repayment lifecycle has succeeded on chain. The frontend now has wallet-specific onboarding, payment requests, proof submission and contract actions. Separate operator and lender routes are implemented. Durable indexing, operator registration and full browser-wallet rehearsal remain pending.
 
 One settlement asset with integer base units. Require a full 30-day evidence window and use a versioned, conservative revenue advance fraction. A candidate formula is `available = max(0, min(verifiedRevenue30d × advanceBps / 10000, operatorCap) - outstandingDebt)`. Parameters are uncalibrated demo assumptions, not a validated credit model. Reject incomplete/stale evidence and overdue operators. Define fee, maturity, rounding and default transitions explicitly before implementation. Do not allow browser-supplied revenue, scores or limits to authorize draws.
 
@@ -56,3 +56,18 @@ Unit: policy boundaries, integer rounding, missing/stale data and unsupported as
 ## Deliverables
 
 Working testnet app and verified contract addresses; public repository with setup and test commands; architecture and trust model; a short demo video; pitch explaining operator need, revenue-backed limits, Creditcoin/Attestcoin use and lender risk; clear table of implemented, mocked and deferred features. No production-readiness claim.
+
+## Live testnet checkpoint — September 8
+
+The canonical deployment completed Sepolia demo payment → native proof acceptance on Creditcoin → funding → borrowing → full repayment. Read-only RPC checks at Creditcoin block 5448880 confirmed loan 1 principal of 40 DemoUSD, original debt of 40.4, remaining debt of zero, and no default. Events confirm funding of 1,000 DemoUSD and repayment of 40.4. Evidence replay simulation was rejected. Public transaction records are in `deployments/sepolia.json`, `deployments/creditcoin-testnet.json` and `deployments/lending-demo.json`.
+
+This is a live test-token flow with controlled payer/operator wallets and the current-UTC-day demo policy; it does not demonstrate independent commercial revenue or production underwriting. The browser reads canonical contracts and has wallet transaction flows. Next: rehearse the full browser flow and implement durable history.
+
+## Product roles and next priorities
+
+- `/operator`: own evidence, borrowing capacity, loans, repayment and settings. No lender funding navigation or vault portfolio.
+- `/lender`: vault liquidity, aggregate outstanding debt, recent loan portfolio, funding and withdrawal. On-chain designated-lender checks remain mandatory; role selection grants no access.
+- `/pay`: customer payment request for a specific operator.
+- Legacy `/app` routes redirect to the appropriate workspace.
+
+Next: verify user-signed browser payment → evidence → borrow → repay; implement durable indexing and pagination; define operator metadata registration and test-token distribution. Public multi-lender onboarding requires a separately designed and tested accounting contract; it is not achieved by showing funding buttons to every wallet.

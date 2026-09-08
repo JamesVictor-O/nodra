@@ -2838,3 +2838,14 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+.live-panel { margin-top: 28px; padding: 28px; border: 1px solid #d9ddd5; background: #fff; }
+.live-panel h2 { margin: 0 0 14px; }
+.live-panel p { line-height: 1.65; max-width: 80ch; }
+.live-address { overflow-wrap: anywhere; font-family: monospace; font-size: 13px; }
+.live-input { display: block; padding: 12px; margin: 10px 0 18px; border: 1px solid #697363; background: #fff; color: #182019; font: inherit; width: min(100%, 320px); }
+.live-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.live-history a { display: flex; justify-content: space-between; gap: 16px; padding: 18px 0; border-top: 1px solid #d9ddd5; flex-wrap: wrap; }
+.live-status { margin-top: 20px; overflow-wrap: anywhere; }
+.live-panel a { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 600px) { .live-panel { padding: 18px; } }

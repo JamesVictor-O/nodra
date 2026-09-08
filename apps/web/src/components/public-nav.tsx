@@ -16,13 +16,13 @@ export function PublicNav() {
           <Link href="/#how-it-works" onClick={() => setOpen(false)}>
             How it works
           </Link>
-          <Link href="/app/market">For lenders</Link>
+          <Link href="/lender">For lenders</Link>
           <Link href="/protocol">
             The protocol <ArrowUpRight size={13} />
           </Link>
         </nav>
-        <Link className="button small dark nav-launch" href="/app">
-          Launch demo <ArrowUpRight size={15} />
+        <Link className="button small dark nav-launch" href="/operator">
+          Launch app <ArrowUpRight size={15} />
         </Link>
         <button
           className="icon-button mobile-toggle"

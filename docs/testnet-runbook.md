@@ -11,14 +11,14 @@ Use a distinct payer wallet and operator wallet. Both must have Sepolia gas as a
 Set `NODRA_PAYER_ADDRESS` to the payer, `NODRA_LENDER_ADDRESS` to the lender and `NODRA_OPERATOR_ADDRESS` to the operator. Configure `SEPOLIA_RPC_URL` and `CREDITCOIN_RPC_URL`. Replace account placeholders with locally imported encrypted accounts. Do a simulation first (omit `--broadcast`), then repeat with `--broadcast` to deploy:
 
 ```sh
-forge script --root contracts script/DeployDemo.s.sol:DeploySource \
+forge script --root contracts contracts/script/DeployDemo.s.sol:DeploySource \
   --rpc-url "$SEPOLIA_RPC_URL" --account <deployer-account> --broadcast
 ```
 
 Record returned token/source addresses as `NODRA_SOURCE_ASSET` and `NODRA_SOURCE_ADDRESS`. Save chain IDs, constructor arguments, transaction hashes and explorer links in a deployment record. Then:
 
 ```sh
-forge script --root contracts script/DeployDemo.s.sol:DeployDestination \
+forge script --root contracts contracts/script/DeployDemo.s.sol:DeployDestination \
   --rpc-url "$CREDITCOIN_RPC_URL" --account <deployer-account> --broadcast
 ```
 
@@ -36,7 +36,7 @@ cast send "$NODRA_SOURCE_ADDRESS" 'pay(address,uint256,bytes32)' "$NODRA_OPERATO
 Inspect the successful receipt and locate its `RevenuePaid` log's zero-based position in the complete receipt logs array. Wait for source attestation; then set `NODRA_EVIDENCE_ADDRESS` and run `npm run proof:prepare -- <payment-hash> <receipt-log-index>`. The tool must output `simulation-passed-not-submitted`; proof service errors are not success. Submit the printed calldata with the operator's account:
 
 ```sh
-cast send "$NODRA_EVIDENCE_ADDRESS" --data <printed-calldata> --rpc-url "$CREDITCOIN_RPC_URL" --account <operator-account>
+cast send "$NODRA_EVIDENCE_ADDRESS" <printed-calldata> --rpc-url "$CREDITCOIN_RPC_URL" --account <operator-account>
 ```
 
 Confirm successful receipt and `EvidenceAccepted` before displaying accepted revenue. Re-running preparation for the same log must fail with replay rejection. Finish within the same UTC day or make a new payment.

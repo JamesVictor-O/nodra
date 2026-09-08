@@ -17,7 +17,7 @@ flowchart LR
   A --> U[Operator and lender web app]
 ```
 
-This diagram is the target architecture. RevenueSource, RevenueEvidence, CreditPolicy and LoanManager are implemented locally and tested; live deployment, API/worker integration and browser wallet transactions remain pending. Signed telemetry needs an identified issuer and a trust policy; anchoring a hash only proves a commitment exists. Revenue must be tied to recognized payment events and operator ownership. Transaction inclusion alone does not establish successful payment or business legitimacy. MVP metrics should call out what they measure and what they do not prove.
+This diagram is the target architecture. RevenueSource, RevenueEvidence, CreditPolicy and LoanManager are deployed on testnet, and the payment-to-repayment lifecycle is confirmed. The web app reads contracts and prepares wallet transactions. Durable API/worker indexing and full browser signing rehearsal remain pending. Signed telemetry needs an identified issuer and a trust policy; anchoring a hash only proves a commitment exists. Revenue must be tied to recognized payment events and operator ownership. Transaction inclusion alone does not establish successful payment or business legitimacy. MVP metrics should call out what they measure and what they do not prove.
 
 ## Responsibilities
 
@@ -38,3 +38,7 @@ Operator (wallet, source-wallet ownership, metadata hash); evidence (chain, tran
 Accept evidence only after on-chain verification and application-level event validation. Bind amount, asset, recipient, source contract, source chain, and event identity; reject stale or replayed evidence and count each payment once. Telemetry is supplementary until issuer trust is established. Do not add different assets without a defined valuation source. Underwriting predicts repayment ability; cryptography does not guarantee repayment.
 
 Loans are undercollateralized and lenders can lose principal. Demo with test assets. Specify delinquency/default and loss accounting, block further borrowing on overdue debt, and avoid promising guaranteed returns. Repayment is voluntary on Creditcoin in the MVP; automated capture of off-chain or cross-chain revenue is out of scope. Portable history means queryable, wallet-linked events; it does not imply other lenders automatically recognize the score.
+
+## Workspace separation
+
+Operator routes under `/operator` expose account-specific revenue, evidence and borrowing. Lender routes under `/lender` expose vault cash, aggregate debt, recent borrower loans and authorized capital management. The public `/pay` route serves customers paying an operator. Legacy `/app` routes redirect. Lender read views are public chain data, not an authorization boundary; funding and withdrawal authority comes from LoanManager.lender(). The current deployment has no lender shares or open capital-provider enrollment.

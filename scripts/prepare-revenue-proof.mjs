@@ -1,6 +1,5 @@
 import { readFile } from 'node:fs/promises';
 import { Contract, JsonRpcProvider, isAddress } from 'ethers';
-import { proofProvider } from '@gluwa/usc-sdk';
 
 // Read-only: no signer, private key, or transaction broadcast.
 const [txHash, logIndexText] = process.argv.slice(2);
@@ -18,11 +17,23 @@ try {
   const registry = new Contract(registryAddress, artifact.abi, rpc);
   const chainKey = await registry.sourceChainKey();
   if (chainKey !== 1n) throw new Error('This demo supports Sepolia chain key 1 only');
-  const builder = new proofProvider.service.ProofBuilder(1,
-    process.env.ATTESTCOIN_PROOF_API_URL ?? 'https://prover.cc3-testnet.creditcoin.network', 20000);
-  const result = await builder.getProof(txHash);
-  if (!result.success || !result.data) throw new Error('Proof unavailable; retry after source attestation');
-  const data = result.data;
+  // Read the service response directly: the SDK discards structured error details.
+  const endpoint = process.env.ATTESTCOIN_PROOF_API_URL ?? 'https://prover.cc3-testnet.creditcoin.network';
+  const response = await fetch(`${endpoint.replace(/\/$/, '')}/api/v1/proof-by-tx/1/${txHash}`, {
+    signal: AbortSignal.timeout(20000),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    const code = typeof data.code === 'string' ? data.code.replace(/[^a-zA-Z0-9_-]/g, '').slice(0,80) : 'Unknown';
+    const messages = {
+      BlockNotOnSourceChain: 'Source block is not yet confirmed or available to the service.',
+      BlockNotAttested: 'Source block is not yet attested.',
+      BlockNotReady: 'The continuity proof is waiting for source-block attestation.',
+    };
+    const progress = Number.isSafeInteger(data.block_number) && Number.isSafeInteger(data.last_attested_block)
+      ? ` Payment block: ${data.block_number}; last attested block: ${data.last_attested_block}.` : '';
+    throw new Error(`Proof service HTTP ${response.status} (${code}). ${messages[code] ?? 'Proof generation failed.'}${progress} ${data.retriable === true ? 'Service reports this is retriable; wait and retry the same payment.' : 'Check service status before retrying.'}`);
+  }
   if (data.chainKey !== 1 || data.txHash?.toLowerCase() !== txHash.toLowerCase()
       || !Number.isSafeInteger(data.headerNumber) || data.headerNumber < 0) throw new Error('Mismatched or unsafe proof metadata');
   const proof = { chainKey: 1n, blockHeight: BigInt(data.headerNumber), encodedTransaction: data.txBytes,
@@ -33,6 +44,9 @@ try {
   console.log(JSON.stringify({ status: 'simulation-passed-not-submitted', evidenceId,
     requestedSourceTransaction: txHash, chainId: '102031', from: operator, ...transaction },
     (_, value) => typeof value === 'bigint' ? value.toString() : value, 2));
+} catch (error) {
+  console.error(error.shortMessage ?? error.message ?? "Proof preparation failed");
+  process.exitCode = 1;
 } finally {
   rpc.destroy();
 }

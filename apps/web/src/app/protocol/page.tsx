@@ -37,7 +37,7 @@ export default function Protocol() {
             <h2>The verification boundary</h2>
             <p>
               Attestcoin readability makes source-chain transaction data
-              available to contracts on Creditcoin. The intended Nodra adapter
+              available to contracts on Creditcoin. The deployed Nodra adapter
               checks receipt success, payment emitter, operator, asset, amount
               and replay protection before accepting revenue.
             </p>
@@ -50,7 +50,7 @@ export default function Protocol() {
             <p>
               A versioned policy derives borrowing capacity from eligible
               revenue and outstanding debt. Funding, repayment and loan history
-              are intended to settle on Creditcoin. Cross-chain outbound
+              settle on Creditcoin. Cross-chain outbound
               settlement is outside the MVP.
             </p>
             <p>
@@ -68,26 +68,26 @@ export default function Protocol() {
             <dl className="detail-list">
               <div>
                 <dt>Frontend</dt>
-                <dd>Interactive demo</dd>
+                <dd>Live testnet workspace</dd>
               </div>
               <div>
                 <dt>Data</dt>
-                <dd>Synthetic fixtures</dd>
+                <dd>Contract reads and events</dd>
               </div>
               <div>
                 <dt>Wallet / contracts</dt>
-                <dd>Not connected</dd>
+                <dd>Connected on testnet</dd>
               </div>
               <div>
-                <dt>Target settlement</dt>
+                <dt>Settlement</dt>
                 <dd>Creditcoin testnet</dd>
               </div>
               <div>
-                <dt>Target source</dt>
+                <dt>Payment source</dt>
                 <dd>Ethereum Sepolia</dd>
               </div>
             </dl>
-            <Link href="/app" className="button dark">
+            <Link href="/operator" className="button dark">
               Explore the interface <ArrowUpRight size={16} />
             </Link>
           </aside>

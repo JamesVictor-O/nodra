@@ -1,0 +1,40 @@
+{
+  "chainId": "11155111",
+  "status": "deployed-per-successful-foundry-receipts",
+  "deployer": "0x2e5d8b56f9b4770a88794a47c32c177542d2f6ea",
+  "payer": "0xD1706995E7a0DdCB59F6CE134c882b1b8fA59C49",
+  "contracts": {
+    "DemoUSD": {
+      "address": "0x284991966A8256521e72470E3B92E03E8aB8c1C3",
+      "transactionHash": "0x22001109244d16e8683f866b8766944ba42effcc7d02872eb6d44264e55fb3d1",
+      "blockNumber": "11655403",
+      "constructorArguments": [
+        "0xD1706995E7a0DdCB59F6CE134c882b1b8fA59C49"
+      ]
+    },
+    "RevenueSource": {
+      "address": "0xd4B7fCecE89ABE7cAEd26aB34b548465ae05eE1B",
+      "transactionHash": "0x780a02125ba7eef8419ab76b7bddaad303b20c8002cb313c4c5cd0be0962edab",
+      "blockNumber": "11657178",
+      "constructorArguments": [
+        "0x284991966A8256521e72470E3B92E03E8aB8c1C3"
+      ]
+    }
+  },
+  "revenuePayment": {
+    "transactionHash": "0x05160d0d45d663c271bee3d329399feb841c609408ee16a65e9c1f9aeca54025",
+    "blockNumber": "11657251",
+    "receiptLogPosition": "1",
+    "amount": "100000000",
+    "paymentId": "1",
+    "status": "successful-source-receipt-creditcoin-acceptance-pending"
+  },
+  "creditcoinEvidenceAcceptance": {
+    "status": "accepted-on-creditcoin",
+    "transactionHash": "0x0125aa4cbc5ec8f0771b521e8f687d1cf4c61eae5c5382d0a043dc6d219b3684",
+    "blockNumber": "5448862",
+    "evidenceId": "0xbc5526964f73ef1a119c06952ebf4211dc4fadc412f870281b6535e22044f2e7",
+    "amount": "100000000",
+    "sourceTransactionHash": "0x05160d0d45d663c271bee3d329399feb841c609408ee16a65e9c1f9aeca54025"
+  }
+}

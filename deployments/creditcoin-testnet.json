@@ -1,0 +1,40 @@
+{
+  "chainId": "102031",
+  "canonical": true,
+  "contracts": {
+    "DemoUSD": {
+      "address": "0xc2B0D2A7e858F13B349843fF87dBF4EBF9227F49",
+      "transactionHash": "0x54d51129a595ce7ba1abb580d7c2e900d461bce77246c8f30d67fa20c1043aab",
+      "blockNumber": "5448776"
+    },
+    "RevenueEvidence": {
+      "address": "0xF7602C048F8C7Cc5E8c514522D633eb9A16a3a1B",
+      "transactionHash": "0xd65bacefa08c4fda76fed72f4ba6682cd63819d2d3eda3e0bc97d055f2ae4527",
+      "blockNumber": "5448777"
+    },
+    "CreditPolicy": {
+      "address": "0x15B9E263B6E896d4D8F0D9c89878678aa6abAdeC",
+      "transactionHash": "0xa4603901c727109e0185538028ba28ee334ed8af0f40fa4f8eaecab6c93d5924",
+      "blockNumber": "5448778"
+    },
+    "LoanManager": {
+      "address": "0x0115CA8539906db2d9a4beE36C64eA94a0d7Fa31",
+      "transactionHash": "0xa047570033678f0b9925a1e469d646082b62a914c9f3c5751a926cdf00ceeda8",
+      "blockNumber": "5448779"
+    }
+  },
+  "unusedDuplicateContracts": {
+    "DemoUSD": "0x284991966A8256521e72470E3B92E03E8aB8c1C3",
+    "RevenueEvidence": "0xd4B7fCecE89ABE7cAEd26aB34b548465ae05eE1B",
+    "CreditPolicy": "0x0D08b49a5f26B429E4d72BF1556FB01E3313156b",
+    "LoanManager": "0xCdC7Bc596C72E4Ff4c8c23B11eeEcb23cA9C97C0"
+  },
+  "evidenceAcceptance": {
+    "status": "accepted-on-creditcoin",
+    "transactionHash": "0x0125aa4cbc5ec8f0771b521e8f687d1cf4c61eae5c5382d0a043dc6d219b3684",
+    "blockNumber": "5448862",
+    "evidenceId": "0xbc5526964f73ef1a119c06952ebf4211dc4fadc412f870281b6535e22044f2e7",
+    "amount": "100000000",
+    "sourceTransactionHash": "0x05160d0d45d663c271bee3d329399feb841c609408ee16a65e9c1f9aeca54025"
+  }
+}
